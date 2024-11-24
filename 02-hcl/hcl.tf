@@ -2,19 +2,17 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.37.0"
+      version = "~> 5.0"
     }
   }
 }
 
-# Actively managed by us, by our Terraform project
 resource "aws_s3_bucket" "my_bucket" {
   bucket = var.bucket_name
 }
 
-# Managed somewhere else, we just want to use in our project
 data "aws_s3_bucket" "my_external_bucket" {
-  bucket = "not-managed-by-us"
+  bucket = "not_managed_by_us"
 }
 
 variable "bucket_name" {
@@ -28,9 +26,10 @@ output "bucket_id" {
 }
 
 locals {
-  local_example = "This is a local variable"
+  local_example = "This is just an example"
 }
 
 module "my_module" {
-  source = "./module-example"
+  source = "./module"
 }
+
