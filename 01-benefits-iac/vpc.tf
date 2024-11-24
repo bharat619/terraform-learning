@@ -8,14 +8,14 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-1"
+  region = "us-west-2"
 }
 
 resource "aws_vpc" "demo_vpc" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "Terraform VPC"
+    "Name" = "Terraform VPC"
   }
 }
 
@@ -32,6 +32,7 @@ resource "aws_subnet" "private_subnet" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.demo_vpc.id
 }
+
 
 resource "aws_route_table" "public_rtb" {
   vpc_id = aws_vpc.demo_vpc.id
